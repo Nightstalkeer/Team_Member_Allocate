@@ -5,7 +5,7 @@ import maleProfile from './images/maleProfile.jpg';
 
 const Employees = () => {
 
-  const [selectedTeam, setTeam] = useState("TeamA");
+  const [selectedTeam, setTeam] = useState("TeamB");
 
   const [employees, setEmployees] = useState([{
     id: 1,
@@ -95,25 +95,24 @@ const Employees = () => {
   //Functions are delared here
 
   function handleTeamSelectionChange(event) {
-    setTeam(event.target.vaule);
+    let s = event.target.value;
+    // console.log(typeof (event.target.value));
+    setTeam(s);
   }
+
+
+  console.log(selectedTeam);
+
 
   function handleEmployeeCardClick(event) {
     const transformedEmployees = employees.map((employee) => employee.id === parseInt(event.currentTarget.id) ? (employee.teamName === selectedTeam) ? { ...employee, teamName: '' } : { ...employee, teamName: selectedTeam } : employee);
 
-    console.log(transformedEmployees);
     setEmployees(transformedEmployees);
-    console.log(selectedTeam);
-    console.log(String(event.currentTarget.id));
+
+    // console.log(transformedEmployees);
+    // console.log(selectedTeam);
+    // console.log(String(event.currentTarget.id));
   }
-
-  // function handleEmployeeCardClick(event) {
-  //   const transformedEmployees = employees.map((employee) => employee.id === parseInt(event.currentTarget.id)
-  //     ? (employee.teamName === selectedTeam) ? { ...employee, teamName: '' } : { ...employee, teamName: selectedTeam }
-  //     : employee);
-  //   setEmployees(transformedEmployees);
-
-  // }
 
   return (
     <main className="container">
@@ -135,7 +134,7 @@ const Employees = () => {
           <div className="card-collection">
             {
               employees.map((employee) => ( // We use parentheses here because we want to return the next line through this function
-                <div key={employee.id} id={employee.id} className={(employee.teamName === selectedTeam ? 'card m-2                   standout' : 'card m-2')} style={{ cursor: "pointer" }} onClick={handleEmployeeCardClick}>
+                <div key={employee.id} id={employee.id} className={(employee.teamName === selectedTeam ? 'card m-2 standout' : 'card m-2')} style={{ cursor: "pointer" }} onClick={handleEmployeeCardClick}>
 
                   {(employee.gender === 'male') ? <img src={maleProfile} className="card-img-top" /> : <img src={femaleProfile} className="card-img-top" />}
 
